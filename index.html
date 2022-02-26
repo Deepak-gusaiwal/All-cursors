@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cursor-1-practice</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    :root {
+  --blue: #1e90ff;
+  --line-height:80px;
+  --bg:red;
+  --cursor-1-size:35px;
+  --cursor-2-size:20px;
+}
+
+
+    nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--blue);
+        height: var(--line-height);
+        position: relative;
+        /* cursor: none; */
+    }
+    div.logo{
+        text-transform: uppercase;
+        font-size: 2.3em;
+        line-height: var(--line-height);
+        /* border: 2px solid black; */
+    }
+    div.logo a{
+        color: white;
+        font-size: 1.2em;
+        text-decoration: none;
+        padding: 0px 19px;
+    }
+    nav ul{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        list-style: none;
+        text-decoration: none;
+        text-transform: capitalize;
+        padding-right: 20px;
+        /* line-height: var(--line-height); */
+    }
+    nav ul li a{
+        text-decoration: none;
+        color: white;
+        font-size: 1.5em;
+        padding: 0px 6px;
+        margin: 0px 5px;
+        transition: all 500ms;
+        /* border: 1px solid black; */
+    }
+    nav ul li a:hover{
+        text-decoration: none;
+        color: var(--blue);
+        background-color: white;
+    }
+    .check-label{
+        color: white;
+        font-size: 2.5em;
+        line-height: var(--line-height);
+        padding-right: 20px;
+        cursor: pointer;
+        display: none;
+        
+    }
+    .label-box{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        /* height: var(--line-height); */
+        display: none;
+    }
+    #check{
+        display: none;
+    }
+    
+   
+
+ 
+
+    @media (max-width:800px){
+
+
+        .label-box{
+        display: block;
+    }
+        .check-label{
+            display: block;
+            display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+        nav ul{
+        position: absolute;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        list-style: none;
+        text-decoration: none;
+        text-transform: capitalize;
+        top: var(--line-height);
+        left: 0;
+        transform: translateX(100%);
+        right: 0;
+        line-height: calc(var(--line-height)*0.5);
+        background-color: var(--blue);
+        transition:transform 1s;
+        padding-left: 20px;
+    }
+   
+   .toggle{
+       border-radius: 5px;
+       background-color: white;
+       width: calc(var(--line-height)*.60);
+       height: calc(var(--line-height)*.60);
+       position: relative;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   .toggle::before,
+   .toggle::after{
+       content: "";
+       position: absolute;
+       background-color: var(--blue);
+       width:calc(var(--line-height)*.10) ;
+       height:calc(var(--line-height)*.40) ;
+       border-radius: 10px;
+   }
+ 
+   .toggle::before,
+   .toggle::after{
+    transform: rotate(90deg);
+    transition: all 0.5s;
+   }
+   .toggle::before{
+       top: -6px;
+   }
+   .toggle::after{
+       bottom: -6px;
+   }
+   .middle{
+    position: absolute;
+       background-color: var(--blue);
+       width:calc(var(--line-height)*.10) ;
+       height:calc(var(--line-height)*.40) ;
+       border-radius: 10px;
+       transform: rotate(90deg);
+       opacity: 1;
+       transition: all 0.5s;
+   }
+
+   #check:checked~ ul{
+        transform: translateX(0%);
+    }
+    #check:checked + .label-box>label>.toggle::before{
+        transform-origin: center;
+        transform: rotate(45deg);
+        top: 7px;
+    }
+    #check:checked + .label-box>label>.toggle::after{
+        transform-origin: center;
+        transform: rotate(-45deg);
+        bottom: 8px;
+    }
+    #check:checked + .label-box>label>.toggle>.middle{
+       opacity: 0;
+    }
+    }
+    /* css for the Tabs */
+    
+    .tab-btns {
+        border: 1px solid black;
+    }
+    
+    .active {
+        background-color: red;
+        color: white;
+    }
+    .btn{
+        padding: 6px 9px;
+        font-size: 20px;
+        text-transform: uppercase;
+        border-radius: 10px;
+    }
+    .tab-box{
+        margin-top: 10px;
+    }
+    
+    /****************************** for cursor-1 ****************************/
+    .cursor-1{
+        position: absolute;
+        width:var(--cursor-1-size);
+        height: var(--cursor-1-size);
+        border-radius: 50%;
+        background-color: var(--blue);
+        transition: 1ms;
+        transform: translate(-50%,-50%);
+        pointer-events: none;
+        z-index: 10;
+        mix-blend-mode:exclusion;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .cursor-1::before{
+        content: "";
+        position: absolute;
+        background-color: white;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        transition: 1s;
+    }
+  
+
+    nav>ul>li:hover~.cursor-1{
+        /* transform: scale(3); */
+    }
+    nav>ul>li:hover~.cursor-1::before{
+        width:var(--cursor-1-size);
+        height: var(--cursor-1-size);
+    }
+   /****************************** for cursor-1 ended ****************************/
+
+/****************************** for cursor-2 ****************************/
+.cursor-2{
+        position: absolute;
+        width:calc(var(--cursor-2-size));
+        height: calc(var(--cursor-2-size));
+        border-radius: 50%;
+        /* background-color: rgb(195, 255, 0); */
+        border: 1px solid var(--blue);
+        transition: 5ms;
+        pointer-events: none;
+        z-index: 10;
+        mix-blend-mode:exclusion;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translate(-50%,-50%);
+        animation: cursor2Anim 0.5s ease-out infinite alternate;
+    }
+    .cursor-2::after{
+        content: "";
+        position: absolute;
+        width:calc(var(--cursor-2-size));
+        height: calc(var(--cursor-2-size));
+        border: 8px solid gray;
+        border-radius: 50%;
+        opacity: 0.5;
+        animation: cursor2Anim2 0.5s ease-out infinite alternate;
+    }
+
+    @keyframes cursor2Anim{
+        from{
+            transform: scale(1);
+        }
+        to{
+            transform: scale(0.7);
+        }
+    }
+    @keyframes cursor2Anim2{
+        from{
+            transform: scale(1);
+        }
+        to{
+            transform: scale(0.4);
+        }
+    }
+    @keyframes cursor2clickAnim{
+        0%{
+            transform: scale(1);
+        }
+        50%{
+            transform: scale(3);
+        }100%{
+            transform: scale(1);
+            opacity: 0;
+        }
+    }
+    .clickForCursor2{
+        animation: cursor2clickAnim 0.5s forwards;
+    }
+  
+
+/****************************** for cursor-2 ended ****************************/
+
+
+/****************************** for cursor-3 ****************************/
+.cursor-3{
+    position: absolute;
+        width:calc(var(--cursor-1-size)*0.30);
+        height:calc(var(--cursor-1-size)*0.30);
+        border-radius: 50%;
+        background-color: var(--blue);
+        background-color: rgb(240, 219, 35);
+        transition: 50ms;
+        transform: translate(-50%,-50%);
+        pointer-events: none;
+        z-index: 10;
+        mix-blend-mode:exclusion;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+   
+   ul>li:hover~.cursor-3{
+    width:calc(var(--cursor-1-size));
+        height: calc(var(--cursor-1-size));
+   }
+ 
+   div.logo:hover~ul>.cursor-3{
+    width:calc(var(--cursor-1-size));
+        height: calc(var(--cursor-1-size));
+   }
+/****************************** for cursor-3 ended ****************************/
+
+   /* none class */
+    .none{
+        display: none;
+    }
+    
+    .click::before{
+        background-color: var(--blue);
+    }
+    .click::after{
+        background-color:var(--blue);
+    }
+</style>
+<body>
+    
+    <nav>
+        <div class="logo">
+            <a href="">LOGO</a>
+        </div>
+        
+        <input type="checkbox" name="" id="check">
+        <div class="label-box">
+            <label for="check" class="check-label"><div class="toggle">
+                <div class="middle"></div>
+            </div></label>
+        </div>
+        <ul>
+            <li class="drop-down"><a href="">Home</a></li>
+            <li><a href="">about us</a></li>
+            <li><a href="">Our services</a></li>
+            <li><a href="">Our gallery</a></li>
+            <li><a href="">contact us</a></li>
+            <div class="cursor-1"></div>
+            <div class="cursor-2"></div>
+            <div class="cursor-3"></div>
+        </ul>
+    </nav>
+    
+        <!-- Tabs started here -->
+                <div class="tab-box">
+                    <button class="btn tab-btns active" id="tab1">cursor-1</button>
+                    <button class="btn tab-btns" id="tab2">curosr-2</button>
+                    <button class="btn tab-btns" id="tab4">cursor-3</button>
+                    <button class="btn tab-btns" id="tab3">No custom cursor</button>
+                </div>
+        <!-- Tabs ended here -->
+   
+    <script>
+
+            // function for tab-btns
+    let tabs = document.querySelectorAll('.tab-btns');
+   let tabsArr = Array.from(tabs)
+   tabs.forEach((e) => {
+       e.addEventListener('click', () => {
+           let active = document.querySelector('.active');
+           active.classList.remove('active')
+           e.classList.add('active');
+           check();
+           console.log('check function has been run successfully')
+       })
+   });
+
+
+       
+
+    //************************Cursor1*****************    
+       let cursor1 = document.querySelector('.cursor-1');
+       document.addEventListener('mousemove',(e)=>{
+        //    console.log("x = "+e.pageX ,'AND',"x = "+e.pageY);
+           let x = e.pageX;
+           let y = e.pageY;
+        cursor1.style.left = x +'px';
+        cursor1.style.top = y+ 'px';
+       });
+       
+       document.addEventListener('click',()=>{
+        cursor1.classList.add('click');
+        setTimeout(() => {
+            cursor1.classList.remove('click');
+        }, 500);
+       });
+// ********************cursor1 ended ***********************
+// ********************cursor2 started ***********************
+       let cursor2 = document.querySelector('.cursor-2');
+       document.addEventListener('mousemove',(e)=>{
+        //    console.log("x = "+e.pageX ,'AND',"x = "+e.pageY);
+           let x = e.pageX -8;
+           let y = e.pageY -8;
+        cursor2.style.left = x +'px';
+        cursor2.style.top = y+ 'px';
+       });
+       
+       document.addEventListener('click',()=>{
+        cursor2.classList.add('clickForCursor2');
+        setTimeout(() => {
+            cursor2.classList.remove('clickForCursor2');
+        }, 200);
+       });
+// ********************cursor2 ended ***********************
+// ********************cursor3 started ***********************
+       let cursor3 = document.querySelector('.cursor-3');
+       document.addEventListener('mousemove',(e)=>{
+        //    console.log("x = "+e.pageX ,'AND',"x = "+e.pageY);
+           let x = e.pageX;
+           let y = e.pageY;
+           cursor3.style.left = x +'px';
+           cursor3.style.top = y+ 'px';
+       });
+       
+       document.addEventListener('click',()=>{
+        cursor3.classList.add('click');
+        setTimeout(() => {
+            cursor2.classList.remove('click');
+        }, 500);
+       });
+// ********************cursor3 ended ***********************
+
+
+       cursor1.classList.add('none');
+       cursor2.classList.add('none');
+       cursor3.classList.add('none');
+
+       function check(){
+        let tab0 = tabsArr[0].classList.contains('active');
+        let tab1 = tabsArr[1].classList.contains('active');
+        let tab2 = tabsArr[2].classList.contains('active');
+        let tab3 = tabsArr[3].classList.contains('active');
+        if(tab0){
+        cursor1.classList.remove('none');
+
+        cursor2.classList.add('none');
+        cursor3.classList.add('none');
+       }else if(tab1){
+        cursor2.classList.remove('none');
+
+        cursor1.classList.add('none');
+        cursor3.classList.add('none');
+       }else if(tab2){
+        cursor3.classList.remove('none');
+
+        cursor1.classList.add('none');
+        cursor2.classList.add('none');
+       }else if(tab3){
+        cursor3.classList.add('none');
+        cursor2.classList.add('none');
+        cursor1.classList.add('none');
+       }
+       }
+       check();
+       
+       
+      
+    </script>
+</body>
+</html>
